@@ -357,20 +357,32 @@ Players.PlayerRemoving:Connect(refreshPlayers)
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local clrs = serv:Channel("Colorpickers")
 
--- state variable for the toggle
 getgenv().ColorToggle = false
+getgenv().ChosenColor = BrickColor.new("Really red") -- default color
+local loop -- for the running task
 
--- add a toggle to turn the feature on/off
-clrs:Toggle("Enable Color Change", false, function(state)
+-- toggle to start/stop autofire
+clrs:Toggle("Enable Auto Color", false, function(state)
     getgenv().ColorToggle = state
+
+    if state then
+        -- start loop
+        loop = task.spawn(function()
+            while getgenv().ColorToggle do
+                local args = {
+                    [1] = getgenv().ChosenColor
+                }
+                ReplicatedStorage.Jump:FireServer(unpack(args))
+                task.wait(0.5) -- adjust speed of firing
+            end
+        end)
+    else
+        -- stop loop
+        getgenv().ColorToggle = false
+    end
 end)
 
--- add the colorpicker, only fires if toggle is ON
+-- colorpicker to set the chosen color
 clrs:Colorpicker("Color", Color3.fromRGB(255, 1, 1), function(color)
-    if getgenv().ColorToggle then
-        local args = {
-            [1] = BrickColor.new(color) -- converts Color3 to BrickColor
-        }
-        ReplicatedStorage.Jump:FireServer(unpack(args))
-    end
+    getgenv().ChosenColor = BrickColor.new(color)
 end)
