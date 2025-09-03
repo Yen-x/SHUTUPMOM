@@ -345,9 +345,6 @@ end
 
 refreshPlayers()
 
-Players.PlayerAdded:Connect(refreshPlayers)
-Players.PlayerRemoving:Connect(refreshPlayers)
-
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local clrs = serv:Channel("Colorpickers")
 
