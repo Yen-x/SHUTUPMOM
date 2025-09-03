@@ -345,19 +345,32 @@ end
 
 refreshPlayers()
 
+Players.PlayerAdded:Connect(refreshPlayers)
+Players.PlayerRemoving:Connect(refreshPlayers)
+
+
+
+
+
+
+
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local clrs = serv:Channel("Colorpickers")
 
--- when the colorpicker changes
-clrs:Colorpicker("Color", Color3.fromRGB(255, 1, 1), function(color)
-    -- turn the Color3 into a BrickColor (or whatever your server expects)
-    local args = {
-        [1] = BrickColor.new(color) -- converts Color3 to BrickColor
-    }
+-- state variable for the toggle
+getgenv().ColorToggle = false
 
-    -- fire the remote with the chosen color
-    ReplicatedStorage.Jump:FireServer(unpack(args))
+-- add a toggle to turn the feature on/off
+clrs:Toggle("Enable Color Change", false, function(state)
+    getgenv().ColorToggle = state
 end)
 
-
-
+-- add the colorpicker, only fires if toggle is ON
+clrs:Colorpicker("Color", Color3.fromRGB(255, 1, 1), function(color)
+    if getgenv().ColorToggle then
+        local args = {
+            [1] = BrickColor.new(color) -- converts Color3 to BrickColor
+        }
+        ReplicatedStorage.Jump:FireServer(unpack(args))
+    end
+end)
