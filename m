@@ -8,15 +8,6 @@ local serv = win:Server("Hi", "")
 local btns = serv:Channel("Main")
 
 
-local lbls = serv:Channel("Labels")
-
-lbls:Label("This is just a label.")
-
-
---gg
-
-btns:Label("All players")
-
 btns:Button("Kill All", function()
 for i,v in pairs(game:GetService("Players"):GetChildren()) do
 if v ~= game.Players.LocalPlayer then
