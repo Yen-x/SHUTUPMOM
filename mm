@@ -8,6 +8,10 @@ local serv = win:Server("Hi", "")
 local btns = serv:Channel("Main")
 
 
+
+
+--gg
+
 btns:Button("Kill All", function()
 for i,v in pairs(game:GetService("Players"):GetChildren()) do
 if v ~= game.Players.LocalPlayer then
@@ -77,8 +81,6 @@ game:GetService("ReplicatedStorage").BTDDamage:FireServer(unpack(args))
 end)
 
 btns:Seperator()
-
-lbls:Label("Items")
 
 
 btns:Toggle("Item", false, function(state)
