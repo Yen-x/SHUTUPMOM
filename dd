@@ -12,20 +12,45 @@ local btns = serv:Channel("Main")
 
 --gg
 
-btns:Seperator()
+btns:Button("Kill All", function()
+for i,v in pairs(game:GetService("Players"):GetChildren()) do
+if v ~= game.Players.LocalPlayer then
+local args = {
+    [1] = v.Character.Humanoid,
+    [2] = CFrame.new(nil, nil, nil) * CFrame.Angles(1.5662832260131836, 0.14169052243232727, -1.5271109342575073),
+    [3] = 999999,
+    [4] = 0,
+    [5] = Vector3.new(nil, nil, nil),
+    [6] = "rbxassetid://241837157",
+    [7] = 0.075,
+    [8] = nil --[[Color3]],
+    [9] = "rbxassetid://260430079",
+    [10] = 1.1,
+    [11] = 2
+}
 
-btns:Button("Anti AFK", function()
-    local vu = game:GetService("VirtualUser")
-
-    game:GetService("Players").LocalPlayer.Idled:Connect(function()
-        vu:Button2Down(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
-        task.wait(1)
-        vu:Button2Up(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
-        DiscordLib:Notification("Notification", "Anti Afk Enabled", "")
-    end)
+game:GetService("ReplicatedStorage").Damage:FireServer(unpack(args))
+        end
+    end
 end)
 
-btns:Button("Freeze", function()
+btns:Button("Fling All", function()
+    for _, v in pairs(game:GetService("Players"):GetPlayers()) do
+        if v ~= game.Players.LocalPlayer and v.Character and v.Character:FindFirstChild("Humanoid") then
+            local args = {
+                [1] = v.Character.Humanoid,
+                [2] = 0,
+                [3] = 1,
+                [4] = Vector3.new(9999999, 9999999, 9999999)
+            }
+
+            game:GetService("ReplicatedStorage").AnubisDamage2:FireServer(unpack(args))
+        end
+    end
+end)
+
+
+btns:Button("Freeze All", function()
     for _, v in pairs(game:GetService("Players"):GetPlayers()) do
         if v ~= game.Players.LocalPlayer and v.Character and v.Character:FindFirstChild("Humanoid") then
             local args = {
@@ -40,7 +65,7 @@ btns:Button("Freeze", function()
     end
 end)
 
-
+btns:Seperator()
 
 btns:Toggle("Item", false, function(state)
     getgenv().GrabItem = state
@@ -79,6 +104,19 @@ end)
 
 
 local tgls = serv:Channel("Local Player")
+
+tgls:Button("Anti AFK", function()
+    local vu = game:GetService("VirtualUser")
+
+    game:GetService("Players").LocalPlayer.Idled:Connect(function()
+        vu:Button2Down(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
+        task.wait(1)
+        vu:Button2Up(Vector2.new(0,0), workspace.CurrentCamera.CFrame)
+        DiscordLib:Notification("Notification", "Anti Afk Enabled", "")
+    end)
+end)
+
+btns:Seperator()
 
 tgls:Button("God", function()
 
