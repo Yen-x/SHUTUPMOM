@@ -37,25 +37,8 @@ local args = {
 
 game:GetService("ReplicatedStorage").AnubisDamage2:FireServer(unpack(args))
 
-		end
-    end
 end)
 
-btns:Button("Fling", function()
-for i,v in pairs(game:GetService("Players"):GetChildren()) do
-if v ~= game.Players.LocalPlayer then
-local args = {
-    [1] = v.Character.Humanoid,
-    [2] = 0,
-    [3] = 5000,
-    [4] = Vector3.new(999999, 999999, 999999)
-}
-
-game:GetService("ReplicatedStorage").AnubisDamage2:FireServer(unpack(args))
-
-		end
-    end
-end)
 
 btns:Toggle("Item", false, function(state)
     getgenv().GrabItem = state
