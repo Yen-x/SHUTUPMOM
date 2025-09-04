@@ -12,7 +12,7 @@ local btns = serv:Channel("Main")
 
 --gg
 
-lbls:Label("All players")
+btns:Label("All players")
 
 btns:Button("Kill All", function()
 for i,v in pairs(game:GetService("Players"):GetChildren()) do
@@ -136,7 +136,7 @@ tgls:Button("Anti AFK", function()
     end)
 end)
 
-btns:Seperator()
+tgls:Seperator()
 
 tgls:Button("God", function()
 
@@ -151,7 +151,7 @@ DiscordLib:Notification("Notification", "You're... God..!", "")
 
 end)
 
-btns:Seperator()
+tgls:Seperator()
 
 tgls:Toggle("Auto Heal", false, function(state)
     getgenv().youregod = state
@@ -280,7 +280,7 @@ drops:Toggle("AUTO HEAL PLAYER", false, function(state)
 end)
 
 
-btns:Seperator()
+tgls:Seperator()
 
 
 --Freeze
