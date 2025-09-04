@@ -37,6 +37,7 @@ local args = {
 
 game:GetService("ReplicatedStorage").AnubisDamage2:FireServer(unpack(args))
 
+	end
 end)
 
 
