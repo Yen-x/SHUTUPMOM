@@ -8,6 +8,9 @@ local serv = win:Server("Hi", "")
 local btns = serv:Channel("Main")
 
 
+local lbls = serv:Channel("Labels")
+
+lbls:Label("This is just a label.")
 
 
 --gg
